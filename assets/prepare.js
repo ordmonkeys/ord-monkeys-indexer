@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 const images = fs.readdirSync('./images')
 
-const promises = images.map((path) => {
+const promises = images.filter(path => path.endsWith('.png')).map((path) => {
     return new Promise((resolve, reject) => {
         fs.readFile('./images/'+ path, (err, data) => {
             if (data) {
