@@ -77,6 +77,10 @@ async function processBatch(inscriptions) {
 
 function markFullyIndexed(topInscriptionNum) {
     console.log(`Fully indexed. Top inscriptionNum is ${topInscriptionNum}`)
+    if (topInscriptionNum === storage.syncedToNum) {
+        // we've already marked this as fully indexed
+        return
+    }
     storage.syncedToNum = topInscriptionNum
     storage.latestOffset = 0
     fs.writeFileSync(STORAGE_FILE, JSON.stringify(storage, null, 2))
