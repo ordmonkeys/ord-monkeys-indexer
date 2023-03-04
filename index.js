@@ -79,6 +79,7 @@ function markFullyIndexed(topInscriptionNum) {
     console.log(`Fully indexed. Top inscriptionNum is ${topInscriptionNum}`)
     if (topInscriptionNum === storage.syncedToNum) {
         // we've already marked this as fully indexed
+        console.log('Already marked as fully indexed', topInscriptionNum, storage.syncedToNum);
         return
     }
     storage.syncedToNum = topInscriptionNum
