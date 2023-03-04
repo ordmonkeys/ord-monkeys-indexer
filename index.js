@@ -93,7 +93,6 @@ function markFullyIndexed(topInscriptionNum) {
     storage.syncedToNum = topInscriptionNum;
 	storage.latestOffset = 0;
     fs.writeFileSync(STORAGE_FILE, JSON.stringify(storage, null, 2));
-    console.log(topInscriptionNum, storage.syncedToNum);
 	if (updateToGithub) {
         // only update github if we've actually synced
         updateGithub();
