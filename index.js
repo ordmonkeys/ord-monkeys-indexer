@@ -112,7 +112,7 @@ async function run() {
             // we've reached a point where we've already synced.
             markFullyIndexed(topInscriptionNum)
             await delay(10 * 1000)
-            break
+            continue
         }
 
         fs.writeFileSync(STORAGE_FILE, JSON.stringify(storage, null, 2))
