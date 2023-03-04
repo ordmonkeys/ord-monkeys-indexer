@@ -89,10 +89,12 @@ async function processBatch(inscriptions) {
 
 function markFullyIndexed(topInscriptionNum) {
 	console.log(`Fully indexed. Top inscriptionNum is ${topInscriptionNum}`);
+    const updateToGithub = topInscriptionNum !== storage.syncedToNum;
     storage.syncedToNum = topInscriptionNum;
 	storage.latestOffset = 0;
     fs.writeFileSync(STORAGE_FILE, JSON.stringify(storage, null, 2));
-	if (topInscriptionNum !== storage.syncedToNum) {
+    console.log(topInscriptionNum, storage.syncedToNum);
+	if (updateToGithub) {
         // only update github if we've actually synced
         updateGithub();
 	}
@@ -103,7 +105,8 @@ let topInscriptionNum;
 async function run() {
     setupStorage();
 	while (true) {
-        const latestOffset = storage.latestOffset;
+        const latestOffset = storage.latestOffset ?? 0;
+        console.log('latest offset', latestOffset);
         try {
             let inscriptions = await getInscriptions({
                 offset: latestOffset
