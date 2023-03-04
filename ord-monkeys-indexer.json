@@ -1,5 +1,10 @@
 {
-  "monkeys": {},
+  "monkeys": {
+    "1.png": {
+      "id": "6224ec47e55dc46c3901ccdec8b2a53c078941f8c678bd3319eb0def0068e4d0i0",
+      "num": 290046
+    }
+  },
   "latestOffset": 0,
-  "syncedToNum": 289980
+  "syncedToNum": 290047
 }
