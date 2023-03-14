@@ -107,6 +107,11 @@ async function run() {
         const latestOffset = storage.latestOffset ?? 0;
         console.log('latest offset', latestOffset);
         try {
+			if (inscriptions.length === 0) {
+				markFullyIndexed(topInscriptionNum);
+				await delay(10 * 1000);
+				continue;
+            }
             let inscriptions = await getInscriptions({
                 offset: latestOffset
             });
@@ -117,11 +122,6 @@ async function run() {
             } else {
                 console.log('Current inscriptions first num:', currentInscriptionNum);
             }
-
-            if (inscriptions.length === 0) {
-                throw('no inscriptions, try again in 2 seconds')
-            }
-
             await processBatch(inscriptions);
 
             if (
