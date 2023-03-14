@@ -107,14 +107,14 @@ async function run() {
         const latestOffset = storage.latestOffset ?? 0;
         console.log('latest offset', latestOffset);
         try {
+			let inscriptions = await getInscriptions({
+                offset: latestOffset
+            });
 			if (inscriptions.length === 0) {
 				markFullyIndexed(topInscriptionNum);
 				await delay(10 * 1000);
 				continue;
             }
-            let inscriptions = await getInscriptions({
-                offset: latestOffset
-            });
             let currentInscriptionNum = inscriptions[0].num;
             if (latestOffset === 0) {
                 topInscriptionNum = currentInscriptionNum;
